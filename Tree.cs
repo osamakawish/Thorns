@@ -29,9 +29,6 @@ namespace Thorns
 
         private Tree(T val, Tree<T> parent) { Value = val; Parent = parent; parent.children.Add(this); }
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <returns>The child nodes of this instance.</returns>
         public HashSet<Tree<T>> Children() => children;
 
@@ -86,16 +83,10 @@ namespace Thorns
             return iter(this).Contains(tree);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="value">The value to test for the containment of.</param>
         /// <returns>True if the tree has given value as a descendant, false otherwise.</returns>
         public bool HasValue(T value) => FirstByValue(value) != null;
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="cond">The condition to test the iteration for.</param>
         /// <param name="iter">The iteration to be applied on this tree. Applies breadth-first by default.</param>
         /// <returns>An iteration over all instances in the provided iteration that satisfy the given condition.</returns>
@@ -105,27 +96,18 @@ namespace Thorns
             return iter(this).Where(cond);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="value">The value to test fror the containment of.</param>
         /// <param name="iter">The iteration to implement. Breadth-first by default.</param>
         /// <returns>An iteration of all descendants with the given value.</returns>
         public IEnumerable<Tree<T>> WhereByValue(T value, Func<Tree<T>, IEnumerable<Tree<T>>> iter = null) 
             => Where((tr) => tr.Value.Equals(value), iter);
 
-        //// <summary>
-        /// 
-        /// </summary>
         /// <param name="cond">The condition to test the iteration for.</param>
         /// <param name="iter">The iteration to be applied on this tree. Applies breadth-first by default.</param>
         /// <returns>An iteration over all instances in the provided iteration that satisfy the given condition.</returns>
         public IEnumerable<Tree<T>> WhereByValue(Func<T, bool> cond, Func<Tree<T>, IEnumerable<Tree<T>>> iter = null) 
             => Where((tr) => cond(tr.Value), iter);
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="value">The value to test fror the containment of.</param>
         /// <param name="iter">The iteration to implement. Breadth-first by default.</param>
         /// <returns>An iteration of the first descendant with the given value.</returns>
